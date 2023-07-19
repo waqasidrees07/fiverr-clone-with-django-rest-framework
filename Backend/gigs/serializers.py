@@ -54,3 +54,14 @@ class GigSerializer(serializers.ModelSerializer):
         PremiumPackage.objects.create(gig=gig, **premium_package_data)
 
         return gig
+
+
+class GetGigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gig
+        fields = '__all__'
+
+    basic_package = BasicPackageSerializer()
+    standard_package = StandardPackageSerializer()
+    premium_package = PremiumPackageSerializer()
+

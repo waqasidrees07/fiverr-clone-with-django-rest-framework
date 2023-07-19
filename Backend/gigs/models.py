@@ -21,7 +21,7 @@ class Gig(models.Model):
 
 
 class BasicPackage(models.Model):
-    gig = models.OneToOneField(Gig, on_delete=models.CASCADE)
+    gig = models.OneToOneField(Gig, on_delete=models.CASCADE, related_name="basic_package")
     name = models.CharField(max_length=45)
     description = models.TextField(max_length=125)
     delivery = models.CharField(choices=DELIVERY_DURATION, max_length=3)
@@ -32,7 +32,7 @@ class BasicPackage(models.Model):
 
 
 class StandardPackage(models.Model):
-    gig = models.OneToOneField(Gig, on_delete=models.CASCADE)
+    gig = models.OneToOneField(Gig, on_delete=models.CASCADE, related_name="standard_package")
     name = models.CharField(max_length=45)
     description = models.TextField(max_length=125)
     delivery = models.CharField(choices=DELIVERY_DURATION, max_length=3)
@@ -43,7 +43,7 @@ class StandardPackage(models.Model):
 
 
 class PremiumPackage(models.Model):
-    gig = models.OneToOneField(Gig, on_delete=models.CASCADE)
+    gig = models.OneToOneField(Gig, on_delete=models.CASCADE, related_name="premium_package")
     name = models.CharField(max_length=45)
     description = models.TextField(max_length=125)
     delivery = models.CharField(choices=DELIVERY_DURATION, max_length=3)

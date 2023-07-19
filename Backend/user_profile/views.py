@@ -6,6 +6,8 @@ from . import serializers
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied, NotFound
+from gigs.models import Gig
+from gigs.serializers import GetGigSerializer
 
 
 # Create your views here.
@@ -19,7 +21,9 @@ class UserProfileView(APIView):
         certificates = Certification.objects.filter(user=user)
         skills = Skills.objects.filter(user=user)
         education = Education.objects.filter(user=user)
+        gigs = Gig.objects.filter(user=user)
 
+        gigs_serializer = GetGigSerializer(gigs, many=True)
         profile_serializer = serializers.MyUserProfileSerializer(profile)
         languages_serializer = serializers.LanguageSerializer(languages, many=True)
         certificates_serializer = serializers.CertificationSerializer(certificates, many=True)
@@ -29,6 +33,7 @@ class UserProfileView(APIView):
         serialized_data = {
             "profile": profile_serializer.data,
             "user": user.username,
+            "gigs": gigs_serializer.data,
             "languages": languages_serializer.data,
             "certificates": certificates_serializer.data,
             "skills": skills_serializer.data,
