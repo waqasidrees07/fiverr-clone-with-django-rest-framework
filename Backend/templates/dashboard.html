@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Products{% endblock title %}
+{% block main-content %}
+<div class="my-4 w-25 mx-auto">
+    <form action="{% url 'search-order' %}" class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search by order no"
+               aria-label="Search" name="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'dashboard' %}" class="btn {{ active }}">Orders</a></li>
+                <li class="d-grid"><a href="{% url 'add-product' %}" class="btn ">Add Product</a></li>
+                <li class="d-grid"><a href="{% url 'products' %}" class="btn">Products</a></li>
+                <li class="d-grid"><a href="{% url 'add-category' %}" class="btn ">Add Category</a></li>
+                <li class="d-grid"><a href="{% url 'category' %}" class="btn">Categories</a></li>
+                <li class="d-grid"><a href="{% url 'add-restaurant' %}" class="btn ">Add Restaurant</a></li>
+                <li class="d-grid"><a href="{% url 'restaurants' %}" class="btn ">Restaurants</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 offset-sm-1">
+            {% for orders in order reversed %}
+                <div class="row mb-3">
+                    <h3>Order No: {{ orders.id }}</h3>
+                    <div class="col-sm-4">
+                        <img src="{{ orders.product.image.url }}" alt=" " width="200" class="">
+                    </div>
+                    <div class="col-sm-8">
+                        <p>Quantity: {{ orders.quantity }}</p>
+                        <p>Product: {{ orders.product.title | title }}</p>
+                        <p>Customer: {{ orders.user_address.nick_name | title }}</p>
+                        <p>Address: {{ orders.user_address.address | title }}</p>
+                        <p>Customer Contact: {{ orders.user_address.contact | title }}</p>
+                        <p><strong>Status: {{ orders.status }}</strong></p>
+                        <p>Order Time: {{ orders.order_time }}</p>
+                        {% if orders.status == "Completed" %}
+                            <h4 class="text-success">Order Completed Successfully</h4>
+                            {% elif orders.status == "Cancelled" %}
+                            <h4 class="text-danger">Order Cancelled</h4>
+                        {% else %}
+                            <a class="text-decoration-none" href="{% url 'updateorder' orders.id %}">
+                                <button type="submit" class="btn btn-primary ">Update</button>
+                            </a>
+                            <a href="{% url 'deleteorder' orders.id %}">
+                                <button type="submit" class="btn btn-danger" onclick="alert('Be Careful')">Delete</button>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}
+

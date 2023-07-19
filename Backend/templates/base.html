@@ -1,0 +1,119 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>{% block title %} {% endblock title %} </title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg " style="background-color: #777877">
+    <div class="container-fluid mx-2">
+        <a class="navbar-brand" href="/" style="color: white; font-size: 1.3em; "><strong>Restaurant Name</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-light"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="">Burger</a></li>
+                        <li><a class="dropdown-item" href="">Pizza</a></li>
+                        <li><a class="dropdown-item" href="">Sandwich</a></li>
+                        <li><a class="dropdown-item" href="">Fries</a></li>
+                        <li><a class="dropdown-item" href="">Shakes</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Restaurants
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="">DHA Branch</a></li>
+                        <li><a class="dropdown-item" href="">Gulberg Branch</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ request.user }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="">Profile</a></li>
+                            <li><a class="dropdown-item" href="">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+                        </ul>
+                    </li>
+                    {% if request.user.is_superuser %}
+                    <li class="nav-item mx-2">
+                        <a href="" class="nav-link text-white fw-bold"><span
+                                class="badge bg-danger"></span>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="/admin" target="blank" class="nav-link text-white fw-bold"><span
+                                class="badge bg-danger "></span>Admin Panel
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'logout' %}" class="nav-link text-white"><span
+                                class="badge bg-danger"></span>Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'signup' %}" class="nav-link text-white">Signup</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% block banner_slider %} {% endblock banner_slider %}
+{% block livesale %} {% endblock livesale %}
+{% block main-content %} {% endblock main-content %}
+
+<!-- Start Footer -->
+<!-- Footer Section -->
+<div class="bg-dark text-center p-2 mt-5">
+    <small class="text-white">Copyright &copy; 2023 || Designed By<b> <a class="text-light text-decoration-none"
+                                                                         href="https://www.linkedin.com/in/waqas-idrees/"
+                                                                         target="_blank"> Waqas Idrees</a></b> ||
+    </small>
+</div>
+<!-- End Footer -->
+
+<!-- Bootstrap Bundle with Popper -->
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+</html>

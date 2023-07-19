@@ -1,0 +1,16 @@
+<!-- your_template.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update MyUserProfile</title>
+</head>
+<body>
+    <h1>Update MyUserProfile</h1>
+    <form method="post" action="{% url 'model_update' pk=form.instance.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

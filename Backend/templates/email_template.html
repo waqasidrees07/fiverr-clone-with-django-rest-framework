@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification Code</title>
+    <style>
+        /* CSS styles for the email template */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            color: #333333;
+        }
+
+        p {
+            color: #555555;
+            margin-bottom: 20px;
+        }
+
+        .verification-code {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .link {
+        text-decoration: none;
+        color: black;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>Hello <strong class="link">{{ username }},</strong></p>
+    <a class="link" href="{% url 'email-verification' %}"><p>click here to verify your account</p></a>
+    <p>Welcome to <strong class="link">Fiverr.</strong></p>
+    <p>Your verification code is: <span class="verification-code">{{ verification_code }}</span></p>
+    <h4>Please use this code to verify your account.</h4>
+    <p>Thank you!</p>
+</div>
+</body>
+</html>

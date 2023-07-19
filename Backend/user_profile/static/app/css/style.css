@@ -1,0 +1,43 @@
+.owl-carousel .item{
+ /* border: 1px solid black; */
+ font-size: 24px;
+ text-align: center;
+ margin-top: 20px;;
+}
+
+.owl-next{
+ float:right;
+}
+.owl-prev{
+ float:left;
+}
+.owl-prev span{
+ font-size: 24px;
+ font-weight: bold;
+}
+.owl-next span{
+ font-size: 24px;
+ font-weight: bold;
+}
+
+
+.body{overflow-x: hidden}
+                                     /** footer Section **/
+
+.footer-section{padding: 0 50px; margin: 0 !important;}
+.footer-section-nav{list-style-type: none;padding: 0}
+.footer-section-nav-menu{text-decoration: none; color: black; display: block;padding: 10px 10px 10px 0;}
+.footer-section-nav-menu:hover{color: black}
+.footer-section-services{list-style-type: none;
+    padding: 0;}
+.footer-section-cols{padding-right: 40px}
+.footer-section-services-menu{text-decoration: none; color: black; display: block; padding: 10px 10px 10px 0; }
+.footer-section-services-menu:hover{color: black}
+.footer-section-email{border-radius: 30px; padding: 7px;width: 80%}
+.footer-btn{background-color: white; border: none; }
+.social-media{padding-top:30px }
+.social-media-icons{width: 30px;margin: 10px}
+.footer-section-element{padding: 7px 0;}
+.footer-section-company-email{color: black;}
+.footer-section-company-email:hover{color: black}
+.restaurant-logo{width: 100px}

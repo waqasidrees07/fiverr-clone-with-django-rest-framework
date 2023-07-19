@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Verify Email {% endblock title%}
+{% block main-content %}
+<form action="" method="post" novalidate class="shadow p-5">
+    {% csrf_token %}
+    {% for fm in form %}
+    <div class="form-group w-25">
+        {{ fm.label_tag }}<br> {{ fm }}<br> <small class="text-danger">{{ fm.errors | striptags }}</small>
+        <br>
+    </div>
+    {% endfor %}
+    <input type="submit" class="btn btn-primary mt-4" value="Verify">
+    <br>
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="alert alert-danger my-3">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+</form>
+{% if messages %}
+{% for message in messages %}
+<p {% if message.tags %}
+   class="alert alert-{{ message.tags }} mb-5" {% endif %}> {{ message }}</p>
+{% endfor %}
+{% endif %}
+
+{% endblock main-content %}
