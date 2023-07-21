@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from rest_framework.views import APIView
 from .models import MyUserProfile, Language, Skills, Certification, Education
 from rest_framework.permissions import IsAuthenticated
 from . import serializers
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied, NotFound
+from rest_framework.exceptions import PermissionDenied
 from gigs.models import Gig
 from gigs.serializers import GetGigSerializer
 
@@ -16,6 +16,9 @@ from gigs.serializers import GetGigSerializer
 class UserProfileView(APIView):
     def get(self, request):
         user = self.request.user
+        if user.email_verified == False:
+            return redirect('email-verification')
+
         profile = MyUserProfile.objects.get(user=user)
         languages = Language.objects.filter(user=user)
         certificates = Certification.objects.filter(user=user)

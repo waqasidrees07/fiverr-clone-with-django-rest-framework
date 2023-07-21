@@ -5,6 +5,7 @@ from . import serializers
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
+from rest_framework.exceptions import PermissionDenied
 
 
 class GigCreateView(generics.CreateAPIView):
@@ -41,7 +42,8 @@ class GigCreateView(generics.CreateAPIView):
             PremiumPackage.objects.create(gig=gig, **premium_package_serializer.validated_data)
 
 
-class GetGigsView(APIView):
+class GetUserGigsView(APIView):
+
     def get(self, request):
         user = self.request.user
         gigs = Gig.objects.filter(user=user)
@@ -50,3 +52,39 @@ class GetGigsView(APIView):
         return Response({"gigs": gigs_serializer.data})
 
 
+class GetGigView(generics.RetrieveAPIView):
+    queryset = Gig.objects.all()
+    serializer_class = serializers.GigSerializer
+    lookup_field = "id"
+
+
+class GigUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Gig.objects.all()
+    serializer_class = serializers.GigSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+
+    def get_object(self):
+        queryset = Gig.objects.all()
+        obj = generics.get_object_or_404(queryset, pk=self.kwargs.get('id'))
+
+        if obj.user != self.request.user:
+            raise PermissionDenied("You do not have permission to update this object.")
+
+        return obj
+
+
+class GigDeleteView(generics.DestroyAPIView):
+    queryset = Gig.objects.all()
+    serializer_class = serializers.GigSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+
+    def get_object(self):
+        queryset = Gig.objects.all()
+        obj = generics.get_object_or_404(queryset, pk=self.kwargs.get('id'))
+
+        if obj.user != self.request.user:
+            raise PermissionDenied("You do not have permission to delete this object.")
+
+        return obj
