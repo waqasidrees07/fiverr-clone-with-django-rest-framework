@@ -30,6 +30,9 @@ class BasicPackage(models.Model):
     content_upload = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return self.name
+
 
 class StandardPackage(models.Model):
     gig = models.OneToOneField(Gig, on_delete=models.CASCADE, related_name="standard_package")
@@ -41,6 +44,9 @@ class StandardPackage(models.Model):
     content_upload = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return self.name
+
 
 class PremiumPackage(models.Model):
     gig = models.OneToOneField(Gig, on_delete=models.CASCADE, related_name="premium_package")
@@ -51,3 +57,6 @@ class PremiumPackage(models.Model):
     revisions = models.IntegerField()
     content_upload = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.name

@@ -18,7 +18,7 @@ from rest_framework.exceptions import NotFound
 
 class HomeView(APIView):
     def get(self, request, *args, **kwargs):
-        user = {"name": "Waqas Ansari"}
+        user = {"Project Name": "Fiverr Clone"}
         return Response(user)
 
 

@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # custom apps
     'rest_framework.authtoken',
+    # custom apps
     "authentication",
     "user_profile",
     "gigs",
+    "order"
 ]
 
 MIDDLEWARE = [

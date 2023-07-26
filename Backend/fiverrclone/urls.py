@@ -22,6 +22,7 @@ urlpatterns = [
     path("", include("authentication.urls")),
     path("", include("user_profile.urls")),
     path("", include("gigs.urls")),
+    path("", include("order.urls")),
     path("api-auth/", include("rest_framework.urls")),
     path("admin/", admin.site.urls),
 ]
