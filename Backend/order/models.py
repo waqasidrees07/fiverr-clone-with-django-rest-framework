@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from authentication.models import MyUser
 from gigs.models import Gig, BasicPackage, StandardPackage, PremiumPackage
@@ -35,3 +37,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order ID: {self.id} - User: {self.user} - Gig: {self.gig} - Package: {self.get_package_display()} - Quantity: {self.quantity}"
+
+
+class Review(models.Model):
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+    image = models.ImageField(upload_to="Review Images")
+    created_at = models.DateTimeField(default=datetime.datetime.now())
+    updated_at = models.DateTimeField(default=datetime.datetime.now())

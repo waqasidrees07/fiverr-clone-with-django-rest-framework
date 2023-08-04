@@ -1,10 +1,9 @@
-# order/views.py
 from rest_framework import generics
 from .models import Order
 from .serializers import OrderSerializer
 from gigs.models import Gig, BasicPackage, StandardPackage, PremiumPackage
-from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 
 
 class OrderCreateView(generics.CreateAPIView):
@@ -57,3 +56,19 @@ class OrderCreateView(generics.CreateAPIView):
         price = pkg_price * quantity
 
         serializer.save(user=requested_user, gig=gig, price=price)
+
+
+class OrderUpdateView(generics.UpdateAPIView):
+    queryset = Order.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = OrderSerializer
+    lookup_field = 'id'
+
+    def get_object(self):
+        queryset = Order.objects.all()
+        obj = generics.get_object_or_404(queryset, pk=self.kwargs.get('id'))
+
+        if obj.gig.user != self.request.user:
+            raise PermissionDenied("You do not have permission to update this object.")
+
+        return obj
