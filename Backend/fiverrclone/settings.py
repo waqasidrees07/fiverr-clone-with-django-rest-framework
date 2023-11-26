@@ -87,7 +87,7 @@ WSGI_APPLICATION = "fiverrclone.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         'NAME': os.environ.get("database_name"),
         'USER': os.environ.get('database_user'),
         'PASSWORD': os.environ.get("database_password"),
@@ -171,3 +171,4 @@ EMAIL_HOST_USER = os.environ.get("email_host_user")
 EMAIL_HOST_PASSWORD = os.environ.get("email_host_password")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
