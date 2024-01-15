@@ -8,15 +8,19 @@ django 4.2.3
 clone project
 
 **create virtual environment**
+
 ```py -m venv virtualenv```
 
 **activate virtual environment**
+
 ```virtualenv\Scripts\activate```
 
 **go to backend directory**
+
 ```cd backend```
 
 **install packages**
+
 ```pip install -r requirements.txt```
 
 **setup database**
