@@ -37,7 +37,7 @@ database_port =
 // enter email details 
 email_host = "smtp.gmail.com"
 email_port = 587
-email_host_user =
+email_host_user =  "your_email"
 email_host_password = "your_email_smtp_password"
 ```
 
@@ -46,5 +46,9 @@ email_host_password = "your_email_smtp_password"
 py manage.py makemigrations
 py manage.py migrate
 ```
+
+**run server**
+
+```py maange.py runserver```
 
 
